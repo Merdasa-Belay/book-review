@@ -15,7 +15,7 @@ class Book extends Model
     {
         return $this->hasMany(Review::class);
     }
-
+    // search
     public function scopeTitle(Builder $query, string $title): Builder
     {
         return $query->where('title', 'LIKE', "%$title%");
