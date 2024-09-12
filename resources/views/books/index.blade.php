@@ -6,9 +6,32 @@
     <form class="mb-4 d-flex align-items-center" role="search" method="GET" action="{{ route('books.index') }}">
         <input class="form-control me-2" type="search" placeholder="Search by title" aria-label="Search"
             value="{{ request('title') }}" name="title" style="height: 40px;">
+        <input type="hidden" name="filter" value="{{ request('filter') }}">
         <button class="btn btn-outline-success me-2" type="submit" style="height: 40px;">Search</button>
         <a href="{{ route('books.index') }}" class="btn btn-outline-warning">Clear</a>
     </form>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+        <div class="container">
+            <div class="d-flex w-100">
+                @php
+                    $filters = [
+                        '' => 'Latest',
+                        'popular_last_month' => 'Popular Last Month',
+                        'popular_last_6month' => 'Popular Last 6 Month',
+                        'highest_rated_last_month' => 'Highest Rated Last Month',
+                        'highest_rated_last_6month' => 'Highest Rated Last 6 Month',
+                    ];
+                @endphp
+                @foreach ($filters as $key => $label)
+                    <a href="{{ route('books.index', [...request()->query(), 'filter' => $key]) }}"
+                        class="btn {{ request('filter') === $key || (request('filter') === null && $key === '') ? 'btn-primary' : 'btn-outline-secondary' }} flex-fill me-2">
+                        {{ $label }}
+                    </a>
+                @endforeach
+            </div>
+        </div>
+    </nav>
+
 
 
     <ul class="list-unstyled">
