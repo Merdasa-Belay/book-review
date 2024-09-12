@@ -2,8 +2,16 @@
 
 @section('content')
     <h1>Books</h1>
-    <form action=""></form>
-    <ul>
+
+    <form class="mb-4 d-flex align-items-center" role="search" method="GET" action="{{ route('books.index') }}">
+        <input class="form-control me-2" type="search" placeholder="Search by title" aria-label="Search"
+            value="{{ request('title') }}" name="title" style="height: 40px;">
+        <button class="btn btn-outline-success me-2" type="submit" style="height: 40px;">Search</button>
+        <a href="{{ route('books.index') }}" class="btn btn-outline-warning">Clear</a>
+    </form>
+
+
+    <ul class="list-unstyled">
         {{-- book items --}}
         @forelse ($books as $book)
             <li class="mb-4">
