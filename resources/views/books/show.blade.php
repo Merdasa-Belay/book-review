@@ -13,7 +13,7 @@
                 <span class="book-review-count small text-muted">
                     {{ $book->reviews_count }} {{ Str::plural('review', $book->reviews_count) }}
                 </span>
-            </div>
+            </div> 
         </div>
     </div>
 
